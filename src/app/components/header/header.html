@@ -1,41 +1,15 @@
-<header class="hr-header">
-  <h1 class="hr-title" routerLink="/">Human Resource</h1>
-  <nav class="hr-nav">
-    <button
-      class="hr-btn"
-      [ngClass]="{ 'hr-btn-active': isActive('/company') }"
-      routerLink="/company"
-    >
-      Company
-    </button>
-    <button
-      class="hr-btn"
-      [ngClass]="{ 'hr-btn-active': isActive('/candidate') }"
-      routerLink="/candidate"
-    >
-      Candidates
-    </button>
-
-    <button
-      class="hr-btn"
-      [ngClass]="{ 'hr-btn-active': isActive('/department') }"
-      routerLink="/department"
-    >
-      Department
-    </button>
-    <button
-      class="hr-btn"
-      [ngClass]="{ 'hr-btn-active': isActive('/employee') }"
-      routerLink="/employee"
-    >
-      Employee
-    </button>
-    <button
-      class="hr-btn"
-      [ngClass]="{ 'hr-btn-active': isActive('/salary') }"
-      routerLink="/salary"
-    >
-      Salary
-    </button>
+<header class="flex justify-between items-center border-b-1 pb-3">
+  <h1 class="text-xl text-blue-600 font-bold">Human Resource</h1>
+  <nav>
+    <div class="flex gap-4">
+      <button mat-button>Dashboard</button>
+      <button mat-button>Recruitment/Hiring</button>
+      <button mat-button>Employee Management</button>
+      <button mat-button>Leave Request</button>
+    </div>
   </nav>
+
+  <div>
+    <button matButton="filled">Logout</button>
+  </div>
 </header>
