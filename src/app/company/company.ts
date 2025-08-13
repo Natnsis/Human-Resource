@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
+import { CompanyTable } from '../components/company-table/company-table';
 
 @Component({
   selector: 'app-company',
-  imports: [],
+  imports: [CompanyTable],
   templateUrl: './company.html',
   styleUrl: './company.css'
 })

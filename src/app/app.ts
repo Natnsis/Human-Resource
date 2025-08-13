@@ -7,7 +7,7 @@ import { Header } from './components/header/header';
   selector: 'app-root',
   imports: [RouterOutlet, CandidateTable, Header],
   template: `
-    <main>
+    <main class="root-container">
       <app-header />
       <router-outlet />
     </main>
