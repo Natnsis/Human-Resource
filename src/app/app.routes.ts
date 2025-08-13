@@ -38,4 +38,24 @@ export const routes: Routes = [
       return import('./company/company').then((m) => m.Company);
     },
   },
+  {
+    path: 'roles',
+    loadComponent: () => {
+      return import('./auth/roles/roles').then((m) => m.Roles);
+    },
+  },
+  {
+    path: 'candidate',
+    loadComponent: () => {
+      return import('./auth/candidate/candidate').then((m) => m.Candidate);
+    },
+  },
+  {
+    path: 'role-employee',
+    loadComponent: () => {
+      return import('./auth/role-employee/role-employee').then(
+        (m) => m.RoleEmployee
+      );
+    },
+  },
 ];

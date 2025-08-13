@@ -1,0 +1,61 @@
+<div class="w-full flex justify-end">
+  <button routerLink="/roles" matButton="filled">Logout</button>
+</div>
+<div class="w-full flex justify-center py-8 bg-gray-50 min-h-screen">
+  <mat-card class="w-full max-w-md shadow-md">
+    <mat-card-header>
+      <h2 class="text-blue-700 font-bold text-2xl text-center">
+        Vacation Leave Request
+      </h2>
+    </mat-card-header>
+    <mat-card-content>
+      <form class="space-y-6">
+        <!-- Name -->
+        <mat-form-field class="w-full" appearance="fill">
+          <mat-label>Name</mat-label>
+          <input
+            matInput
+            placeholder="Your Name"
+            [(ngModel)]="name"
+            name="name"
+          />
+        </mat-form-field>
+
+        <!-- Position -->
+        <mat-form-field class="w-full" appearance="fill">
+          <mat-label>Position</mat-label>
+          <input
+            matInput
+            placeholder="Your Position"
+            [(ngModel)]="position"
+            name="position"
+          />
+        </mat-form-field>
+
+        <!-- Letter -->
+        <mat-form-field class="w-full" appearance="fill">
+          <mat-label>Leave Letter</mat-label>
+          <textarea
+            matInput
+            rows="5"
+            placeholder="Write your leave request..."
+            [(ngModel)]="letter"
+            name="letter"
+          ></textarea>
+        </mat-form-field>
+
+        <!-- Submit Button -->
+        <div class="flex justify-end">
+          <button
+            mat-raised-button
+            color="primary"
+            type="submit"
+            class="rounded-lg px-6 py-2 font-semibold"
+          >
+            Request Leave
+          </button>
+        </div>
+      </form>
+    </mat-card-content>
+  </mat-card>
+</div>
