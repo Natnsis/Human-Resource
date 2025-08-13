@@ -1,11 +1,13 @@
-<header class="flex justify-between items-center border-b-1 pb-3">
-  <h1 class="text-xl text-blue-600 font-bold">Human Resource</h1>
+<header
+  class="flex justify-between items-center border-b-1 pb-3 cursor-pointer"
+>
+  <h1 routerLink="/" class="text-xl text-blue-600 font-bold">Human Resource</h1>
   <nav>
     <div class="flex gap-4">
-      <button mat-button>Dashboard</button>
-      <button mat-button>Recruitment/Hiring</button>
-      <button mat-button>Employee Management</button>
-      <button mat-button>Leave Request</button>
+      <button mat-button routerLink="/">Dashboard</button>
+      <button mat-button routerLink="/recruitment">Recruitment/Hiring</button>
+      <button mat-button routerLink="/employees">Employee Management</button>
+      <button mat-button routerLink="/request">Leave Request</button>
     </div>
   </nav>
 
