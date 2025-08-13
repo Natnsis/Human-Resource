@@ -1,1 +1,41 @@
-<p>header works!</p>
+<header class="hr-header">
+  <h1 class="hr-title" routerLink="/">Human Resource</h1>
+  <nav class="hr-nav">
+    <button
+      class="hr-btn"
+      [ngClass]="{ 'hr-btn-active': isActive('/company') }"
+      routerLink="/company"
+    >
+      Company
+    </button>
+    <button
+      class="hr-btn"
+      [ngClass]="{ 'hr-btn-active': isActive('/candidate') }"
+      routerLink="/candidate"
+    >
+      Candidates
+    </button>
+
+    <button
+      class="hr-btn"
+      [ngClass]="{ 'hr-btn-active': isActive('/department') }"
+      routerLink="/department"
+    >
+      Department
+    </button>
+    <button
+      class="hr-btn"
+      [ngClass]="{ 'hr-btn-active': isActive('/employee') }"
+      routerLink="/employee"
+    >
+      Employee
+    </button>
+    <button
+      class="hr-btn"
+      [ngClass]="{ 'hr-btn-active': isActive('/salary') }"
+      routerLink="/salary"
+    >
+      Salary
+    </button>
+  </nav>
+</header>

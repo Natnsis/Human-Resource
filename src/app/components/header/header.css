@@ -1,0 +1,50 @@
+.hr-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 18px 32px;
+  background: linear-gradient(90deg, #e3f2fd 0%, #f5faff 100%);
+  box-shadow: 0 2px 8px rgba(33, 150, 243, 0.04);
+}
+
+.hr-title {
+  margin: 0;
+  font-size: 2rem;
+  font-weight: 700;
+  color: #1976d2;
+  letter-spacing: 2px;
+  font-family: "Segoe UI", Arial, sans-serif;
+  text-shadow: 0 2px 8px rgba(33, 150, 243, 0.04);
+  cursor: pointer;
+}
+
+.hr-nav {
+  display: flex;
+  gap: 18px;
+}
+
+.hr-btn {
+  background: rgba(25, 118, 210, 0.07);
+  color: #1976d2;
+  border: none;
+  border-radius: 24px;
+  padding: 8px 24px;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.2s, box-shadow 0.2s;
+  box-shadow: 0 2px 8px rgba(33, 150, 243, 0.04);
+}
+
+.hr-btn:hover,
+.hr-btn:focus {
+  background: rgba(25, 118, 210, 0.18);
+  box-shadow: 0 4px 16px rgba(33, 150, 243, 0.1);
+}
+
+.hr-btn-active {
+  background: #fff;
+  color: #1976d2;
+  font-weight: 700;
+  box-shadow: 0 2px 8px rgba(33, 150, 243, 0.1);
+}

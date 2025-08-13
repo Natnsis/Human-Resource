@@ -1,13 +1,15 @@
 import { Component, signal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { CandidateTable } from './components/candidate-table/candidate-table';
+import { Header } from './components/header/header';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, CandidateTable],
+  imports: [RouterOutlet, CandidateTable, Header],
   template: `
     <main>
-      <app-candidate-table />
+      <app-header />
+      <router-outlet />
     </main>
   `,
   styleUrl: './app.css',
