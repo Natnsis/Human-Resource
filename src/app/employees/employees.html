@@ -1,12 +1,15 @@
 <app-header />
 <div class="flex gap-10 items-center mt-10">
   <h1 class="text-lg text-blue-800">Company Employees</h1>
+  <app-employees />
+
   <input
     type="text"
     placeholder="Search..."
     class="border border-blue-300 rounded-md px-3 py-2 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition"
   />
 </div>
+
 <div class="mt-5 flex justify-center">
   <div class="w-[90%]">
     <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">

@@ -1,0 +1,57 @@
+<h2>Employees</h2>
+
+<form [formGroup]="form" (ngSubmit)="submit()" class="form">
+  <div class="row">
+    <label>Name</label>
+    <input formControlName="name" type="text" />
+  </div>
+  <div class="row">
+    <label>Email</label>
+    <input formControlName="email" type="email" />
+  </div>
+  <div class="row">
+    <label>Department</label>
+    <input formControlName="department" type="text" />
+  </div>
+  <div class="row">
+    <label>Salary</label>
+    <input formControlName="salary" type="number" />
+  </div>
+  <div class="row">
+    <label>Password</label>
+    <input formControlName="password" type="text" />
+  </div>
+
+  <button type="submit">{{ editingId === null ? "Add" : "Save" }}</button>
+  <button type="button" (click)="cancelEdit()" *ngIf="editingId !== null">
+    Cancel
+  </button>
+</form>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Name</th>
+      <th>Email</th>
+      <th>Department</th>
+      <th>Salary</th>
+      <th>Password</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let e of employees; trackBy: trackById">
+      <td>{{ e.id }}</td>
+      <td>{{ e.name }}</td>
+      <td>{{ e.email }}</td>
+      <td>{{ e.department }}</td>
+      <td>{{ e.salary }}</td>
+      <td>{{ e.password }}</td>
+      <td>
+        <button (click)="edit(e)">Edit</button>
+        <button (click)="remove(e.id)">Delete</button>
+      </td>
+    </tr>
+  </tbody>
+</table>
