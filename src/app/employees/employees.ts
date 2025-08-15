@@ -57,8 +57,7 @@ export class Employees implements OnInit {
     this.empService.getAll().subscribe((data) => {
       this.employees = data;
       this.dataSource = new MatTableDataSource(this.employees);
-
-      // Optional: filter by default (empty)
+      //filter
       this.dataSource.filterPredicate = (
         data: EmployeeModel,
         filter: string

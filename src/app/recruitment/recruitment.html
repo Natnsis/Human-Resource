@@ -1,37 +1,139 @@
 <app-header />
+
 <div class="flex gap-10 items-center mt-10">
-  <h1 class="text-lg text-blue-800">Applied Candidates</h1>
+  <h1 class="text-lg text-blue-800 font-semibold">Applied Candidates</h1>
   <input
     type="text"
     placeholder="Search..."
+    (keyup)="applyFilter($event)"
     class="border border-blue-300 rounded-md px-3 py-2 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition"
   />
 </div>
+
 <div class="mt-5 flex justify-center">
-  <div class="w-[90%]">
-    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
-      <!-- Position Column -->
-      <ng-container matColumnDef="position">
-        <th mat-header-cell *matHeaderCellDef>No.</th>
-        <td mat-cell *matCellDef="let element">{{ element.position }}</td>
+  <div class="w-[90%] overflow-x-auto">
+    <table
+      mat-table
+      [dataSource]="dataSource"
+      class="mat-elevation-z8 w-full min-w-[700px]"
+    >
+      <!-- ID -->
+      <ng-container matColumnDef="id">
+        <th
+          mat-header-cell
+          *matHeaderCellDef
+          class="text-left px-4 py-2 bg-gray-100 border-b border-gray-300"
+        >
+          ID
+        </th>
+        <td
+          mat-cell
+          *matCellDef="let row"
+          class="px-4 py-2 border-b border-gray-200"
+        >
+          {{ row.id }}
+        </td>
       </ng-container>
 
-      <!-- Name Column -->
+      <!-- Name -->
       <ng-container matColumnDef="name">
-        <th mat-header-cell *matHeaderCellDef>Name</th>
-        <td mat-cell *matCellDef="let element">{{ element.name }}</td>
+        <th
+          mat-header-cell
+          *matHeaderCellDef
+          class="text-left px-4 py-2 bg-gray-100 border-b border-gray-300"
+        >
+          Name
+        </th>
+        <td
+          mat-cell
+          *matCellDef="let row"
+          class="px-4 py-2 border-b border-gray-200"
+        >
+          {{ row.name }}
+        </td>
       </ng-container>
 
-      <!-- Weight Column -->
-      <ng-container matColumnDef="weight">
-        <th mat-header-cell *matHeaderCellDef>Weight</th>
-        <td mat-cell *matCellDef="let element">{{ element.weight }}</td>
+      <!-- Email -->
+      <ng-container matColumnDef="email">
+        <th
+          mat-header-cell
+          *matHeaderCellDef
+          class="text-left px-4 py-2 bg-gray-100 border-b border-gray-300"
+        >
+          Email
+        </th>
+        <td
+          mat-cell
+          *matCellDef="let row"
+          class="px-4 py-2 border-b border-gray-200"
+        >
+          {{ row.email }}
+        </td>
       </ng-container>
 
-      <!-- Symbol Column -->
-      <ng-container matColumnDef="symbol">
-        <th mat-header-cell *matHeaderCellDef>Symbol</th>
-        <td mat-cell *matCellDef="let element">{{ element.symbol }}</td>
+      <!-- Position -->
+      <ng-container matColumnDef="position">
+        <th
+          mat-header-cell
+          *matHeaderCellDef
+          class="text-left px-4 py-2 bg-gray-100 border-b border-gray-300"
+        >
+          Position
+        </th>
+        <td
+          mat-cell
+          *matCellDef="let row"
+          class="px-4 py-2 border-b border-gray-200"
+        >
+          {{ row.position }}
+        </td>
+      </ng-container>
+
+      <!-- Degree -->
+      <ng-container matColumnDef="degree">
+        <th
+          mat-header-cell
+          *matHeaderCellDef
+          class="text-left px-4 py-2 bg-gray-100 border-b border-gray-300"
+        >
+          Degree
+        </th>
+        <td
+          mat-cell
+          *matCellDef="let row"
+          class="px-4 py-2 border-b border-gray-200"
+        >
+          {{ row.degree }}
+        </td>
+      </ng-container>
+
+      <!-- Actions -->
+      <ng-container matColumnDef="actions">
+        <th
+          mat-header-cell
+          *matHeaderCellDef
+          class="text-left px-4 py-2 bg-gray-100 border-b border-gray-300"
+        >
+          Actions
+        </th>
+        <td
+          mat-cell
+          *matCellDef="let row"
+          class="px-4 py-2 border-b border-gray-200 flex gap-2"
+        >
+          <button
+            (click)="accept(row)"
+            class="bg-green-500 text-white px-4 py-1 rounded-md hover:bg-green-600 transition"
+          >
+            Accept
+          </button>
+          <button
+            (click)="reject(row)"
+            class="bg-red-500 text-white px-4 py-1 rounded-md hover:bg-red-600 transition"
+          >
+            Reject
+          </button>
+        </td>
       </ng-container>
 
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
