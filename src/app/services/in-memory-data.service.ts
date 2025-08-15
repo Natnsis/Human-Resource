@@ -9,14 +9,14 @@ import { LeaveRequestModel } from '../models/leave.model';
 })
 export class InMemoryDataService {
   createDb() {
-    const Department: DepartmentModel[] = [
+    const department: DepartmentModel[] = [
       { employeeId: 1, departmentName: 'ui/ux' },
       { employeeId: 2, departmentName: 'frontEnd' },
       { employeeId: 3, departmentName: 'Human resource' },
       { employeeId: 3, departmentName: 'full stack' },
     ];
 
-    const Candidate: CandidateModel[] = [
+    const candidate: CandidateModel[] = [
       {
         name: 'natnael',
         email: 'nsisay49@gmail.com',
@@ -43,7 +43,7 @@ export class InMemoryDataService {
       },
     ];
 
-    const Employee: EmployeeModel[] = [
+    const employee: EmployeeModel[] = [
       {
         id: 1,
         name: 'natnael',
@@ -53,7 +53,7 @@ export class InMemoryDataService {
         password: '234',
       },
       {
-        id: 1,
+        id: 2,
         name: 'natnael',
         email: 'nsisay49@gmail.com',
         department: 'fullStack',
@@ -61,7 +61,7 @@ export class InMemoryDataService {
         password: '234',
       },
       {
-        id: 1,
+        id: 3,
         name: 'natnael',
         email: 'nsisay49@gmail.com',
         department: 'fullStack',
@@ -69,7 +69,7 @@ export class InMemoryDataService {
         password: '234',
       },
       {
-        id: 1,
+        id: 4,
         name: 'natnael',
         email: 'nsisay49@gmail.com',
         department: 'fullStack',
@@ -77,7 +77,8 @@ export class InMemoryDataService {
         password: '234',
       },
     ];
-    const LeaveRequest: LeaveRequestModel[] = [
+
+    const leave: LeaveRequestModel[] = [
       {
         name: 'natnael',
         position: 'full stack dev',
@@ -99,5 +100,13 @@ export class InMemoryDataService {
         letter: 'i need to get some air',
       },
     ];
+
+    return { leave, employee, department, candidate };
+  }
+
+  genId(employees: EmployeeModel[]): number {
+    return employees.length > 0
+      ? Math.max(...employees.map((emp) => emp.id)) + 1
+      : 1;
   }
 }
