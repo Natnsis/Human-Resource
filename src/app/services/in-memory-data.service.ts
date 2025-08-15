@@ -83,21 +83,25 @@ export class InMemoryDataService {
         name: 'natnael',
         position: 'full stack dev',
         letter: 'i need to get some air',
+        isAccepted: false,
       },
       {
-        name: 'natnael',
+        name: 'abrham',
         position: 'full stack dev',
         letter: 'i need to get some air',
+        isAccepted: false,
       },
       {
-        name: 'natnael',
+        name: 'abiyu',
         position: 'full stack dev',
         letter: 'i need to get some air',
+        isAccepted: false,
       },
       {
-        name: 'natnael',
+        name: 'alemu',
         position: 'full stack dev',
         letter: 'i need to get some air',
+        isAccepted: false,
       },
     ];
 
