@@ -4,7 +4,6 @@ import { MatCardModule } from '@angular/material/card';
 import { MatTableModule } from '@angular/material/table';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
-import { EmployeesComponent } from '../features/employees/employees';
 
 export interface PeriodicElement {
   name: string;
@@ -34,7 +33,6 @@ const ELEMENT_DATA: PeriodicElement[] = [
     MatTableModule,
     MatFormFieldModule,
     MatIconModule,
-    EmployeesComponent,
   ],
   templateUrl: './employees.html',
   styleUrl: './employees.css',
