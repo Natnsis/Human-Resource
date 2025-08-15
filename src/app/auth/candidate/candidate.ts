@@ -7,6 +7,9 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatButtonModule } from '@angular/material/button';
 import { ErrorStateMatcher } from '@angular/material/core';
 import { RouterLink } from '@angular/router';
+import { CommonModule } from '@angular/common'; // <-- Add this
+import { ApplyingService } from '../../services/InnerServices/applying.service';
+import { CandidateModel } from '../../models/candidate.model';
 
 export class MyErrorStateMatcher implements ErrorStateMatcher {
   isErrorState(control: FormControl | null, form: any): boolean {
@@ -21,18 +24,18 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
 
 @Component({
   selector: 'app-candidate',
+  standalone: true,
   imports: [
+    CommonModule, // <-- Add this
     MatCardModule,
     MatFormFieldModule,
     MatInputModule,
     MatSelectModule,
     MatButtonModule,
     ReactiveFormsModule,
-    MatButtonModule,
     RouterLink,
   ],
   templateUrl: './candidate.html',
-  styleUrl: './candidate.css',
 })
 export class Candidate {
   nameFormControl = new FormControl('', [Validators.required]);
@@ -44,11 +47,37 @@ export class Candidate {
   degreeFormControl = new FormControl('', [Validators.required]);
   matcher = new MyErrorStateMatcher();
 
-  onFileSelected(event: Event) {
-    const input = event.target as HTMLInputElement;
-    if (input.files && input.files.length > 0) {
-      const file = input.files[0];
-      //file upload logic
+  constructor(private applyingService: ApplyingService) {}
+
+  submitApplication() {
+    if (
+      this.nameFormControl.invalid ||
+      this.emailFormControl.invalid ||
+      this.positionFormControl.invalid ||
+      this.degreeFormControl.invalid
+    ) {
+      alert('Please fill all fields correctly.');
+      return;
     }
+
+    const newCandidate: CandidateModel = {
+      name: this.nameFormControl.value!,
+      email: this.emailFormControl.value!,
+      position: this.positionFormControl.value!,
+      degree: this.degreeFormControl.value!,
+    };
+
+    this.applyingService.addCandidate(newCandidate);
+
+    this.nameFormControl.reset();
+    this.emailFormControl.reset();
+    this.positionFormControl.reset();
+    this.degreeFormControl.reset();
+
+    alert('Application submitted successfully!');
+  }
+
+  onFileSelected(event: Event) {
+    // File input is visual only
   }
 }
