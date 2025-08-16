@@ -1,58 +1,128 @@
 <app-header />
-<div class="mt-5 flex justify-evenly">
-  <mat-card>
-    <mat-card-content>
-      <p class="text-sm text-gray-500">Number of employees</p>
-      <h1 class="text-center text-3xl font-bold text-blue-800">100</h1>
-    </mat-card-content>
-  </mat-card>
-  <mat-card>
-    <mat-card-content>
-      <p class="text-sm text-gray-500">Number of Candidates</p>
-      <h1 class="text-center text-3xl font-bold text-blue-800">64</h1>
-    </mat-card-content>
-  </mat-card>
-  <mat-card>
-    <mat-card-content>
-      <p class="text-sm text-gray-500">Number of Leaves</p>
-      <h1 class="text-center text-3xl font-bold text-blue-800">12</h1>
-    </mat-card-content>
-  </mat-card>
+<div class="mt-6 flex justify-around gap-4">
+  <div
+    class="bg-white rounded-xl shadow-md hover:shadow-lg transition-shadow duration-300 p-6 min-w-64"
+  >
+    <div class="text-center">
+      <p class="text-sm text-gray-500 mb-2">Number of employees</p>
+      <h1 class="text-4xl font-bold text-blue-700">100</h1>
+    </div>
+  </div>
+  <div
+    class="bg-white rounded-xl shadow-md hover:shadow-lg transition-shadow duration-300 p-6 min-w-64"
+  >
+    <div class="text-center">
+      <p class="text-sm text-gray-500 mb-2">Number of Candidates</p>
+      <h1 class="text-4xl font-bold text-blue-700">64</h1>
+    </div>
+  </div>
+  <div
+    class="bg-white rounded-xl shadow-md hover:shadow-lg transition-shadow duration-300 p-6 min-w-64"
+  >
+    <div class="text-center">
+      <p class="text-sm text-gray-500 mb-2">Number of Leaves</p>
+      <h1 class="text-4xl font-bold text-blue-700">12</h1>
+    </div>
+  </div>
 </div>
 
-<div class="flex gap-10 items-center mt-10">
-  <h1 class="text-lg text-blue-800">Departments</h1>
-  <input
-    type="text"
-    placeholder="Search..."
-    (input)="applyFilter($event)"
-    class="border border-blue-300 rounded-md px-3 py-2 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition"
-  />
+<div class="flex gap-6 items-center mt-10 mb-4">
+  <h1 class="text-xl font-semibold text-blue-800">Departments</h1>
+  <div class="relative flex-1 max-w-md">
+    <input
+      type="text"
+      placeholder="Search..."
+      (input)="applyFilter($event)"
+      class="w-full border border-blue-300 rounded-lg px-4 py-2 pl-10 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200"
+    />
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      class="h-5 w-5 text-gray-400 absolute left-3 top-2.5"
+      fill="none"
+      viewBox="0 0 24 24"
+      stroke="currentColor"
+    >
+      <path
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        stroke-width="2"
+        d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+      />
+    </svg>
+  </div>
 </div>
 
-<div class="mt-5 flex justify-center">
-  <div class="w-[90%]">
-    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 w-full">
+<div class="mt-6 overflow-x-auto">
+  <div class="w-full px-4">
+    <table
+      mat-table
+      [dataSource]="dataSource"
+      class="min-w-full bg-white rounded-lg shadow-sm overflow-hidden"
+    >
       <!-- ID Column -->
       <ng-container matColumnDef="id">
-        <th mat-header-cell *matHeaderCellDef>No.</th>
-        <td mat-cell *matCellDef="let element">{{ element.id }}</td>
+        <th
+          mat-header-cell
+          *matHeaderCellDef
+          class="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider border-b border-gray-200"
+        >
+          No.
+        </th>
+        <td
+          mat-cell
+          *matCellDef="let element"
+          class="px-6 py-4 whitespace-nowrap text-sm text-gray-900 border-b border-gray-100"
+        >
+          {{ element.id }}
+        </td>
       </ng-container>
 
       <!-- Department Name Column -->
       <ng-container matColumnDef="departmentName">
-        <th mat-header-cell *matHeaderCellDef>Department</th>
-        <td mat-cell *matCellDef="let element">{{ element.departmentName }}</td>
+        <th
+          mat-header-cell
+          *matHeaderCellDef
+          class="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider border-b border-gray-200"
+        >
+          Department
+        </th>
+        <td
+          mat-cell
+          *matCellDef="let element"
+          class="px-6 py-4 whitespace-nowrap text-sm text-gray-900 border-b border-gray-100"
+        >
+          {{ element.departmentName }}
+        </td>
       </ng-container>
 
       <!-- Employee Name Column -->
       <ng-container matColumnDef="employeeName">
-        <th mat-header-cell *matHeaderCellDef>Employee</th>
-        <td mat-cell *matCellDef="let element">{{ element.employeeName }}</td>
+        <th
+          mat-header-cell
+          *matHeaderCellDef
+          class="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider border-b border-gray-200"
+        >
+          Employee
+        </th>
+        <td
+          mat-cell
+          *matCellDef="let element"
+          class="px-6 py-4 whitespace-nowrap text-sm text-gray-900 border-b border-gray-100"
+        >
+          {{ element.employeeName }}
+        </td>
       </ng-container>
 
-      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-      <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+      <tr
+        mat-header-row
+        *matHeaderRowDef="displayedColumns"
+        class="bg-gray-50"
+      ></tr>
+      <tr
+        mat-row
+        *matRowDef="let row; columns: displayedColumns"
+        class="hover:bg-blue-50 transition-colors duration-150"
+      ></tr>
     </table>
   </div>
 </div>
