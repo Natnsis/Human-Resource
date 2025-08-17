@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { Header } from '../components/header/header';
-import { MatCardModule } from '@angular/material/card';
 import { MatTableModule, MatTableDataSource } from '@angular/material/table';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
-import { InMemoryDataService } from '../services/in-memory-data.service';
+import { CommonModule } from '@angular/common';
+import { ApplyingService } from '../services/InnerServices/applying.service';
 import { EmployeeModel } from '../models/employee.model';
+import { Header } from '../components/header/header';
 import { CandidateModel } from '../models/candidate.model';
+import { Subscription } from 'rxjs';
 
 interface CandidateRow {
   id: number;
@@ -21,12 +21,11 @@ interface CandidateRow {
   selector: 'app-recruitment',
   standalone: true,
   imports: [
-    Header,
-    MatCardModule,
+    CommonModule,
     MatTableModule,
-    MatFormFieldModule,
-    MatIconModule,
+    MatButtonModule,
     MatSnackBarModule,
+    Header,
   ],
   templateUrl: './recruitment.html',
 })
@@ -42,39 +41,38 @@ export class Recruitment implements OnInit {
   dataSource: MatTableDataSource<CandidateRow> =
     new MatTableDataSource<CandidateRow>([]);
   employees: EmployeeModel[] = [];
+  private subscription!: Subscription;
 
   constructor(
-    private dbService: InMemoryDataService,
+    private applyingService: ApplyingService,
     private snackBar: MatSnackBar
   ) {}
 
   ngOnInit() {
-    const db = this.dbService.createDb();
-    this.employees = db.employee;
-
-    const tableData: CandidateRow[] = db.candidate.map((cand, index) => ({
-      id: index + 1,
-      name: cand.name,
-      email: cand.email,
-      position: cand.position,
-      degree: cand.degree,
-    }));
-
-    this.dataSource.data = tableData;
+    // Subscribe to the reactive candidate list
+    this.subscription = this.applyingService.candidates$.subscribe(
+      (candidates: CandidateModel[]) => {
+        const tableData: CandidateRow[] = candidates.map((cand, index) => ({
+          id: index + 1,
+          name: cand.name,
+          email: cand.email,
+          position: cand.position,
+          degree: cand.degree,
+        }));
+        this.dataSource.data = tableData;
+      }
+    );
   }
 
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value
       .trim()
       .toLowerCase();
-    this.dataSource.filterPredicate = (data: CandidateRow, filter: string) => {
-      return (
-        data.name.toLowerCase().includes(filter) ||
-        data.email.toLowerCase().includes(filter) ||
-        data.position.toLowerCase().includes(filter) ||
-        data.degree.toLowerCase().includes(filter)
-      );
-    };
+    this.dataSource.filterPredicate = (data: CandidateRow, filter: string) =>
+      data.name.toLowerCase().includes(filter) ||
+      data.email.toLowerCase().includes(filter) ||
+      data.position.toLowerCase().includes(filter) ||
+      data.degree.toLowerCase().includes(filter);
     this.dataSource.filter = filterValue;
   }
 
@@ -94,42 +92,23 @@ export class Recruitment implements OnInit {
         'Close',
         {
           duration: 3000,
-          panelClass: [
-            '!bg-green-500',
-            '!text-white',
-            '!rounded-lg',
-            '!px-4',
-            '!py-2',
-          ],
         }
       );
     } else {
       this.snackBar.open(`${row.name} already exists!`, 'Close', {
         duration: 3000,
-        panelClass: [
-          '!bg-red-500',
-          '!text-white',
-          '!rounded-lg',
-          '!px-4',
-          '!py-2',
-        ],
       });
     }
   }
 
-  reject(row: CandidateRow) {
-    this.dataSource.data = this.dataSource.data.filter(
-      (item) => item.id !== row.id
-    );
-    this.snackBar.open(`${row.name} has been rejected!`, 'Close', {
-      duration: 3000,
-      panelClass: [
-        '!bg-gray-700',
-        '!text-white',
-        '!rounded-lg',
-        '!px-4',
-        '!py-2',
-      ],
-    });
+  // reject(row: CandidateRow) {
+  //   this.applyingService.removeCandidate(row.email);
+  //   this.snackBar.open(`${row.name} has been rejected!`, 'Close', {
+  //     duration: 3000,
+  //   });
+  // }
+
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
   }
 }

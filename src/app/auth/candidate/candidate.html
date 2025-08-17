@@ -1,12 +1,10 @@
-<div class="w-full flex justify-end px-6 py-4">
-  <button
-    routerLink="/roles"
-    class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 ease-in-out transform hover:scale-[1.02] shadow-sm hover:shadow focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
-  >
-    Logout
-  </button>
-</div>
-
+<button
+  type="button"
+  routerLink="/roles"
+  class="bg-gray-300 hover:bg-gray-400 text-gray-800 px-6 py-2 rounded-lg font-medium transition-transform duration-200 ease-in-out transform hover:scale-105 shadow-sm hover:shadow focus:outline-none focus:ring-2 focus:ring-gray-400 focus:ring-offset-2"
+>
+  Back
+</button>
 <div class="w-full flex justify-center py-8 bg-gray-50 min-h-screen">
   <div class="w-full max-w-xl bg-white rounded-xl shadow-lg overflow-hidden">
     <div
@@ -15,107 +13,113 @@
       <h1 class="text-2xl font-bold mb-2">Job Application</h1>
       <p class="text-blue-100 text-sm">Apply for your dream job below</p>
     </div>
+
     <div class="p-8">
-      <form class="space-y-6" (ngSubmit)="submitApplication()">
+      <form
+        [formGroup]="candidateForm"
+        (ngSubmit)="submitApplication()"
+        class="space-y-6"
+      >
         <!-- Name -->
-        <div class="space-y-2">
-          <label class="block text-sm font-medium text-gray-700">Name</label>
+        <div>
+          <label class="block text-sm font-medium text-gray-700 mb-1"
+            >Name</label
+          >
           <input
             type="text"
-            [formControl]="nameFormControl"
+            formControlName="name"
             placeholder="Your Name"
             class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200"
-            (blur)="nameFormControl.markAsTouched()"
           />
           <div
-            *ngIf="nameFormControl.invalid && nameFormControl.touched"
+            *ngIf="
+              candidateForm.get('name')?.invalid &&
+              candidateForm.get('name')?.touched
+            "
             class="text-red-500 text-sm mt-1"
           >
-            <div *ngIf="nameFormControl.hasError('required')">
-              Name is <strong>required</strong>
-            </div>
+            Name is required
           </div>
         </div>
 
         <!-- Email -->
-        <div class="space-y-2">
-          <label class="block text-sm font-medium text-gray-700">Email</label>
+        <div>
+          <label class="block text-sm font-medium text-gray-700 mb-1"
+            >Email</label
+          >
           <input
             type="email"
-            [formControl]="emailFormControl"
+            formControlName="email"
             placeholder="Ex. pat@example.com"
             class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200"
-            (blur)="emailFormControl.markAsTouched()"
           />
           <div
-            *ngIf="emailFormControl.invalid && emailFormControl.touched"
+            *ngIf="
+              candidateForm.get('email')?.invalid &&
+              candidateForm.get('email')?.touched
+            "
             class="text-red-500 text-sm mt-1"
           >
-            <div *ngIf="emailFormControl.hasError('required')">
-              Email is <strong>required</strong>
+            <div *ngIf="candidateForm.get('email')?.errors?.['required']">
+              Email is required
             </div>
-            <div
-              *ngIf="
-                emailFormControl.hasError('email') &&
-                !emailFormControl.hasError('required')
-              "
-            >
-              Please enter a valid email address
+            <div *ngIf="candidateForm.get('email')?.errors?.['email']">
+              Invalid email
             </div>
           </div>
         </div>
 
-        <!-- Applied Position -->
-        <div class="space-y-2">
-          <label class="block text-sm font-medium text-gray-700"
+        <!-- Position -->
+        <div>
+          <label class="block text-sm font-medium text-gray-700 mb-1"
             >Applied Position</label
           >
           <select
-            [formControl]="positionFormControl"
-            (blur)="positionFormControl.markAsTouched()"
-            class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200 appearance-none bg-white bg-[url('image/svg+xml,%3csvg xmlns=%27http://www.w3.org/2000/svg%27 fill=%27none%27 viewBox=%270 0 20 20%27%3e%3cpath stroke=%27%236B7280%27 stroke-linecap=%27round%27 stroke-linejoin=%27round%27 stroke-width=%271.5%27 d=%27m6 8 4 4 4-4%27/%3e%3c/svg%3e')] bg-right pr-10 bg-no-repeat cursor-pointer"
+            formControlName="position"
+            class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200"
           >
-            <option value="" disabled selected>Select Position</option>
+            <option value="" disabled>Select Position</option>
             <option value="frontend">Frontend Developer</option>
             <option value="backend">Backend Developer</option>
             <option value="hr">HR Manager</option>
             <option value="designer">UI/UX Designer</option>
           </select>
           <div
-            *ngIf="positionFormControl.invalid && positionFormControl.touched"
+            *ngIf="
+              candidateForm.get('position')?.invalid &&
+              candidateForm.get('position')?.touched
+            "
             class="text-red-500 text-sm mt-1"
           >
-            <div *ngIf="positionFormControl.hasError('required')">
-              Position is <strong>required</strong>
-            </div>
+            Position is required
           </div>
         </div>
 
-        <!-- Degree Department -->
-        <div class="space-y-2">
-          <label class="block text-sm font-medium text-gray-700"
+        <!-- Degree -->
+        <div>
+          <label class="block text-sm font-medium text-gray-700 mb-1"
             >Degree Department</label
           >
           <input
             type="text"
-            [formControl]="degreeFormControl"
+            formControlName="degree"
             placeholder="E.g. Computer Science"
             class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200"
-            (blur)="degreeFormControl.markAsTouched()"
           />
           <div
-            *ngIf="degreeFormControl.invalid && degreeFormControl.touched"
+            *ngIf="
+              candidateForm.get('degree')?.invalid &&
+              candidateForm.get('degree')?.touched
+            "
             class="text-red-500 text-sm mt-1"
           >
-            <div *ngIf="degreeFormControl.hasError('required')">
-              Degree Department is <strong>required</strong>
-            </div>
+            Degree is required
           </div>
         </div>
 
-        <!-- Resume Upload -->
-        <div class="space-y-2">
-          <label class="block text-sm font-medium text-gray-700"
+        <!-- Resume -->
+        <div>
+          <label class="block text-sm font-medium text-gray-700 mb-1"
             >Upload Resume</label
           >
           <input
@@ -127,16 +131,11 @@
         </div>
 
         <!-- Submit Button -->
-        <div class="flex justify-end pt-2">
+        <div class="flex justify-end">
           <button
             type="submit"
-            [disabled]="
-              nameFormControl.invalid ||
-              emailFormControl.invalid ||
-              positionFormControl.invalid ||
-              degreeFormControl.invalid
-            "
-            class="bg-blue-600 hover:bg-blue-700 text-white px-8 py-2.5 rounded-lg font-semibold transition-all duration-200 ease-in-out transform hover:scale-[1.02] shadow-sm hover:shadow focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none"
+            [disabled]="candidateForm.invalid"
+            class="bg-blue-600 hover:bg-blue-700 text-white px-8 py-2.5 rounded-lg font-semibold transition-transform duration-200 ease-in-out transform hover:scale-105 shadow-sm hover:shadow focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed"
           >
             Submit Application
           </button>

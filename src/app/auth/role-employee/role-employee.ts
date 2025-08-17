@@ -29,7 +29,6 @@ export class RoleEmployee {
   constructor(private leaveService: LeaveRequestService) {}
 
   submitLeaveRequest() {
-    // Validate form fields
     if (!this.name.trim() || !this.position.trim() || !this.letter.trim()) {
       alert('Please fill in all fields.');
       return;
@@ -40,7 +39,7 @@ export class RoleEmployee {
       name: this.name.trim(),
       position: this.position.trim(),
       letter: this.letter.trim(),
-      isAccepted: false, // default
+      isAccepted: false,
     };
 
     // Add to the service array
