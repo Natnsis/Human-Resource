@@ -101,12 +101,12 @@ export class Recruitment implements OnInit {
     }
   }
 
-  // reject(row: CandidateRow) {
-  //   this.applyingService.removeCandidate(row.email);
-  //   this.snackBar.open(`${row.name} has been rejected!`, 'Close', {
-  //     duration: 3000,
-  //   });
-  // }
+  reject(row: CandidateRow) {
+    this.applyingService.removeCandidate(row.email);
+    this.snackBar.open(`${row.name} has been Assessed!`, 'Close', {
+      duration: 3000,
+    });
+  }
 
   ngOnDestroy() {
     this.subscription.unsubscribe();
