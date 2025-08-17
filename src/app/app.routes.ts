@@ -23,19 +23,13 @@ export const routes: Routes = [
   {
     path: 'request',
     loadComponent: () => {
-      return import('./requests/requests').then((m) => m.Requests);
+      return import('./requests/requests').then((m) => m.RequestsComponent);
     },
   },
   {
     path: 'employees',
     loadComponent: () => {
       return import('./employees/employees').then((m) => m.Employees);
-    },
-  },
-  {
-    path: 'company',
-    loadComponent: () => {
-      return import('./company/company').then((m) => m.Company);
     },
   },
   {

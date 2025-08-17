@@ -1,61 +1,74 @@
-<div class="w-full flex justify-end">
-  <button routerLink="/roles" matButton="filled">Logout</button>
+<div class="w-full flex justify-end px-6 py-4">
+  <button
+    routerLink="/roles"
+    class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 ease-in-out transform hover:scale-[1.02] shadow-sm hover:shadow focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+  >
+    Logout
+  </button>
 </div>
+
 <div class="w-full flex justify-center py-8 bg-gray-50 min-h-screen">
-  <mat-card class="w-full max-w-md shadow-md">
-    <mat-card-header>
-      <h2 class="text-blue-700 font-bold text-2xl text-center">
-        Vacation Leave Request
-      </h2>
-    </mat-card-header>
-    <mat-card-content>
-      <form class="space-y-6">
+  <div class="w-full max-w-md bg-white rounded-xl shadow-lg overflow-hidden">
+    <div
+      class="text-center p-6 bg-gradient-to-r from-blue-600 to-blue-800 text-white"
+    >
+      <h2 class="text-xl font-bold">Vacation Leave Request</h2>
+    </div>
+    <div class="p-6">
+      <form class="space-y-6" (ngSubmit)="submitLeaveRequest()">
         <!-- Name -->
-        <mat-form-field class="w-full" appearance="fill">
-          <mat-label>Name</mat-label>
+        <div class="space-y-2">
+          <label class="block text-sm font-medium text-gray-700">Name</label>
           <input
-            matInput
+            type="text"
             placeholder="Your Name"
             [(ngModel)]="name"
             name="name"
+            required
+            class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200"
           />
-        </mat-form-field>
+        </div>
 
         <!-- Position -->
-        <mat-form-field class="w-full" appearance="fill">
-          <mat-label>Position</mat-label>
+        <div class="space-y-2">
+          <label class="block text-sm font-medium text-gray-700"
+            >Position</label
+          >
           <input
-            matInput
+            type="text"
             placeholder="Your Position"
             [(ngModel)]="position"
             name="position"
+            required
+            class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200"
           />
-        </mat-form-field>
+        </div>
 
         <!-- Letter -->
-        <mat-form-field class="w-full" appearance="fill">
-          <mat-label>Leave Letter</mat-label>
+        <div class="space-y-2">
+          <label class="block text-sm font-medium text-gray-700"
+            >Leave Letter</label
+          >
           <textarea
-            matInput
             rows="5"
             placeholder="Write your leave request..."
             [(ngModel)]="letter"
             name="letter"
+            required
+            class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200 resize-none"
           ></textarea>
-        </mat-form-field>
+        </div>
 
         <!-- Submit Button -->
-        <div class="flex justify-end">
+        <div class="flex justify-end pt-2">
           <button
-            mat-raised-button
-            color="primary"
             type="submit"
-            class="rounded-lg px-6 py-2 font-semibold"
+            class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2.5 rounded-lg font-semibold transition-all duration-200 ease-in-out transform hover:scale-[1.02] shadow-sm hover:shadow focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
           >
             Request Leave
           </button>
         </div>
       </form>
-    </mat-card-content>
-  </mat-card>
+    </div>
+  </div>
 </div>

@@ -1,42 +1,157 @@
 <app-header />
 
-<div class="flex gap-10 items-center mt-10">
-  <h1 class="text-lg text-blue-800">Employees Leave requests</h1>
-  <input
-    type="text"
-    placeholder="Search..."
-    class="border border-blue-300 rounded-md px-3 py-2 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition"
-  />
+<div class="flex gap-6 items-center mt-10 mb-6">
+  <h1 class="text-xl font-semibold text-blue-800">Employees Leave Requests</h1>
+  <div class="relative flex-1 max-w-md">
+    <input
+      [formControl]="searchControl"
+      type="text"
+      placeholder="Search..."
+      class="w-full border border-blue-300 rounded-lg px-4 py-2 pl-10 focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500 transition"
+    />
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      class="h-5 w-5 text-blue-400 absolute left-3 top-2.5"
+      fill="none"
+      viewBox="0 0 24 24"
+      stroke="currentColor"
+    >
+      <path
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        stroke-width="2"
+        d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+      />
+    </svg>
+  </div>
 </div>
-<div class="mt-5 flex justify-center">
-  <div class="w-[90%]">
-    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+<div class="mt-6 flex justify-center">
+  <div class="w-[90%] overflow-x-auto">
+    <table
+      mat-table
+      [dataSource]="dataSource"
+      class="min-w-full border border-gray-200 rounded-lg overflow-hidden"
+    >
       <!-- Position Column -->
       <ng-container matColumnDef="position">
-        <th mat-header-cell *matHeaderCellDef>No.</th>
-        <td mat-cell *matCellDef="let element">{{ element.position }}</td>
+        <th
+          mat-header-cell
+          *matHeaderCellDef
+          class="text-left px-4 py-2 bg-blue-50 border-b border-gray-300 text-blue-800 font-medium"
+        >
+          No.
+        </th>
+        <td
+          mat-cell
+          *matCellDef="let element"
+          class="px-4 py-2 border-b border-gray-200 text-gray-900"
+        >
+          {{ element.positionIndex }}
+        </td>
       </ng-container>
 
       <!-- Name Column -->
       <ng-container matColumnDef="name">
-        <th mat-header-cell *matHeaderCellDef>Name</th>
-        <td mat-cell *matCellDef="let element">{{ element.name }}</td>
+        <th
+          mat-header-cell
+          *matHeaderCellDef
+          class="text-left px-4 py-2 bg-blue-50 border-b border-gray-300 text-blue-800 font-medium"
+        >
+          Name
+        </th>
+        <td
+          mat-cell
+          *matCellDef="let element"
+          class="px-4 py-2 border-b border-gray-200 text-gray-900"
+        >
+          {{ element.name }}
+        </td>
       </ng-container>
 
-      <!-- Weight Column -->
-      <ng-container matColumnDef="weight">
-        <th mat-header-cell *matHeaderCellDef>Weight</th>
-        <td mat-cell *matCellDef="let element">{{ element.weight }}</td>
+      <!-- Position Title Column -->
+      <ng-container matColumnDef="positionTitle">
+        <th
+          mat-header-cell
+          *matHeaderCellDef
+          class="text-left px-4 py-2 bg-blue-50 border-b border-gray-300 text-blue-800 font-medium"
+        >
+          Position
+        </th>
+        <td
+          mat-cell
+          *matCellDef="let element"
+          class="px-4 py-2 border-b border-gray-200 text-gray-900"
+        >
+          {{ element.position }}
+        </td>
       </ng-container>
 
-      <!-- Symbol Column -->
-      <ng-container matColumnDef="symbol">
-        <th mat-header-cell *matHeaderCellDef>Symbol</th>
-        <td mat-cell *matCellDef="let element">{{ element.symbol }}</td>
+      <!-- Letter Column -->
+      <ng-container matColumnDef="letter">
+        <th
+          mat-header-cell
+          *matHeaderCellDef
+          class="text-left px-4 py-2 bg-blue-50 border-b border-gray-300 text-blue-800 font-medium"
+        >
+          Letter
+        </th>
+        <td
+          mat-cell
+          *matCellDef="let element"
+          class="px-4 py-2 border-b border-gray-200 text-gray-900"
+        >
+          {{ element.letter }}
+        </td>
+      </ng-container>
+
+      <!-- Status Column -->
+      <ng-container matColumnDef="status">
+        <th
+          mat-header-cell
+          *matHeaderCellDef
+          class="text-left px-4 py-2 bg-blue-50 border-b border-gray-300 text-blue-800 font-medium"
+        >
+          Status
+        </th>
+        <td
+          mat-cell
+          *matCellDef="let element"
+          class="px-4 py-2 border-b border-gray-200 text-gray-900"
+        >
+          {{ getStatusText(element) }}
+        </td>
+      </ng-container>
+
+      <!-- Action Column -->
+      <ng-container matColumnDef="action">
+        <th
+          mat-header-cell
+          *matHeaderCellDef
+          class="text-left px-4 py-2 bg-blue-50 border-b border-gray-300 text-blue-800 font-medium"
+        >
+          Action
+        </th>
+        <td
+          mat-cell
+          *matCellDef="let element"
+          class="px-4 py-2 border-b border-gray-200"
+        >
+          <button
+            class="bg-blue-500 hover:bg-blue-600 text-white px-3 py-1 rounded text-sm transition-colors duration-200"
+            (click)="toggleStatus(element)"
+          >
+            Change
+          </button>
+        </td>
       </ng-container>
 
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-      <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+      <tr
+        mat-row
+        *matRowDef="let row; columns: displayedColumns"
+        class="hover:bg-gray-50 transition-colors duration-150"
+      ></tr>
     </table>
   </div>
 </div>

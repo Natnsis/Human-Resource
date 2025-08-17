@@ -1,54 +1,72 @@
 import { Component } from '@angular/core';
-import { FormControl, Validators, ReactiveFormsModule } from '@angular/forms';
-import { MatCardModule } from '@angular/material/card';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatInputModule } from '@angular/material/input';
-import { MatSelectModule } from '@angular/material/select';
+import { CommonModule } from '@angular/common';
+import {
+  ReactiveFormsModule,
+  FormGroup,
+  FormBuilder,
+  Validators,
+} from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
-import { ErrorStateMatcher } from '@angular/material/core';
+import { MatInputModule } from '@angular/material/input';
+import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
+import { ApplyingService } from '../../services/InnerServices/applying.service';
 import { RouterLink } from '@angular/router';
-
-export class MyErrorStateMatcher implements ErrorStateMatcher {
-  isErrorState(control: FormControl | null, form: any): boolean {
-    const isSubmitted = form && form.submitted;
-    return !!(
-      control &&
-      control.invalid &&
-      (control.dirty || control.touched || isSubmitted)
-    );
-  }
-}
+import { CandidateModel } from '../../models/candidate.model';
 
 @Component({
   selector: 'app-candidate',
+  standalone: true,
   imports: [
-    MatCardModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatSelectModule,
-    MatButtonModule,
+    CommonModule,
     ReactiveFormsModule,
     MatButtonModule,
+    MatInputModule,
+    MatSnackBarModule,
     RouterLink,
   ],
   templateUrl: './candidate.html',
-  styleUrl: './candidate.css',
 })
 export class Candidate {
-  nameFormControl = new FormControl('', [Validators.required]);
-  emailFormControl = new FormControl('', [
-    Validators.required,
-    Validators.email,
-  ]);
-  positionFormControl = new FormControl('', [Validators.required]);
-  degreeFormControl = new FormControl('', [Validators.required]);
-  matcher = new MyErrorStateMatcher();
+  candidateForm: FormGroup;
+  selectedFile: File | null = null;
+
+  constructor(
+    private fb: FormBuilder,
+    private applyingService: ApplyingService,
+    private snackBar: MatSnackBar
+  ) {
+    this.candidateForm = this.fb.group({
+      name: ['', Validators.required],
+      email: ['', [Validators.required, Validators.email]],
+      position: ['', Validators.required],
+      degree: ['', Validators.required],
+    });
+  }
 
   onFileSelected(event: Event) {
     const input = event.target as HTMLInputElement;
     if (input.files && input.files.length > 0) {
-      const file = input.files[0];
-      //file upload logic
+      this.selectedFile = input.files[0];
     }
+  }
+
+  submitApplication() {
+    if (this.candidateForm.invalid) {
+      this.snackBar.open('Please fill in all fields correctly.', 'Close', {
+        duration: 3000,
+      });
+      return;
+    }
+
+    const candidate: CandidateModel = {
+      ...this.candidateForm.value,
+    };
+
+    this.applyingService.addCandidate(candidate);
+    this.snackBar.open('Candidate applied successfully!', 'Close', {
+      duration: 3000,
+    });
+    this.candidateForm.reset();
+    this.selectedFile = null;
   }
 }

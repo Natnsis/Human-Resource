@@ -1,17 +1,52 @@
 <header
-  class="flex justify-between items-center border-b-1 pb-3 cursor-pointer"
+  class="flex justify-between items-center border-b border-gray-200 pb-3 cursor-pointer bg-white shadow-sm px-6 py-4"
 >
-  <h1 routerLink="/" class="text-xl text-blue-600 font-bold">Human Resource</h1>
+  <h1
+    routerLink="/"
+    class="text-xl text-blue-600 font-bold hover:text-blue-800 transition-colors duration-200"
+  >
+    Human Resource
+  </h1>
   <nav>
-    <div class="flex gap-4">
-      <button mat-button routerLink="/">Dashboard</button>
-      <button mat-button routerLink="/recruitment">Recruitment/Hiring</button>
-      <button mat-button routerLink="/employees">Employee Management</button>
-      <button mat-button routerLink="/request">Leave Request</button>
+    <div class="flex gap-2">
+      <button
+        mat-button
+        routerLink="/"
+        class="px-3 py-2 text-sm font-medium text-gray-700 rounded-lg hover:bg-blue-50 hover:text-blue-600 transition-all duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50"
+      >
+        Dashboard
+      </button>
+      <button
+        mat-button
+        routerLink="/recruitment"
+        class="px-3 py-2 text-sm font-medium text-gray-700 rounded-lg hover:bg-blue-50 hover:text-blue-600 transition-all duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50"
+      >
+        Recruitment/Hiring
+      </button>
+      <button
+        mat-button
+        routerLink="/employees"
+        class="px-3 py-2 text-sm font-medium text-gray-700 rounded-lg hover:bg-blue-50 hover:text-blue-600 transition-all duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50"
+      >
+        Employee Management
+      </button>
+      <button
+        mat-button
+        routerLink="/request"
+        class="px-3 py-2 text-sm font-medium text-gray-700 rounded-lg hover:bg-blue-50 hover:text-blue-600 transition-all duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50"
+      >
+        Leave Request
+      </button>
     </div>
   </nav>
 
   <div>
-    <button matButton="filled" routerLink="/roles">Logout</button>
+    <button
+      matButton="filled"
+      routerLink="/roles"
+      class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 ease-in-out transform hover:scale-[1.02] focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 shadow-sm hover:shadow"
+    >
+      Logout
+    </button>
   </div>
 </header>
